@@ -10,6 +10,5 @@ fn main() {
         _ => println!("Ain't special"),
     }
 
-    println!("{}", binary_search::binary_search());
 }
 
