@@ -1,3 +1,5 @@
+mod binary_search;
+
 fn main() {
     let number = 13;
 
@@ -7,4 +9,7 @@ fn main() {
         13..=19 => println!("A teen"),
         _ => println!("Ain't special"),
     }
+
+    println!("{}", binary_search::binary_search());
 }
+
