@@ -1,29 +1,42 @@
-pub fn binary_search<T: PartialOrd>(vec: &Vec<T>, target: T) -> usize {
-    let mut lb = 0 as usize;
-    let mut ub = vec.len();
+pub fn binary_search_core<T: PartialOrd>(vec: &Vec<T>, target: T) -> Option<usize> {
+    let mut lb = -1;
+    let mut ub = vec.len() as i32;
     while ub - lb > 1 {
         let mid = (lb+ub)/2;
-        if vec[mid] >= target {
+        if vec[mid as usize] == target {
+            return Some(mid as usize);
+        }
+        if vec[mid as usize] >= target {
             ub = mid;
         } else {
             lb = mid;
         }
     }
-    return ub;
+    return None;
 }
 
-
+pub fn binary_search<T: PartialOrd>(vec: &Vec<T>, target: T) -> i64 {
+    let res = binary_search_core(vec, target);
+    match res {
+        Some(n) => return n as i64,
+        None => return -1,
+    }
+}
 
 #[test]
-fn it_works() {
+fn binary_search_test() {
     let mut vec = Vec::new();
     vec.push(1);
     vec.push(2);
     vec.push(3);
     vec.push(4);
     vec.push(5);
-    assert_eq!(1, binary_search(&vec, 2));
-    assert_eq!(3, binary_search(&vec, 4));
-    println!("{}", binary_search(&vec, 0));
-    // assert_eq!(0, );
+
+    assert_eq!(0,binary_search(&vec, 1));
+    assert_eq!(1,binary_search(&vec, 2));
+    assert_eq!(2,binary_search(&vec, 3));
+    assert_eq!(3,binary_search(&vec, 4));
+    assert_eq!(4,binary_search(&vec, 5));
+    assert_eq!(-1,binary_search(&vec, -10000));
+    assert_eq!(-1,binary_search(&vec, 10));
 }
