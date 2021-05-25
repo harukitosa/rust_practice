@@ -40,3 +40,22 @@ fn binary_search_test() {
     assert_eq!(-1,binary_search(&vec, -10000));
     assert_eq!(-1,binary_search(&vec, 10));
 }
+
+#[test]
+fn binary_search_str_test() {
+    let mut vec = Vec::new();
+    vec.push("america");
+    vec.push("black");
+    vec.push("coffee");
+    vec.push("dely");
+    vec.push("egg");
+    println!("{:?}", vec);
+
+    assert_eq!(0,binary_search(&vec, "america"));
+    assert_eq!(1,binary_search(&vec, "black"));
+    assert_eq!(2,binary_search(&vec, "coffee"));
+    assert_eq!(3,binary_search(&vec, "dely"));
+    assert_eq!(4,binary_search(&vec, "egg"));
+    assert_eq!(-1,binary_search(&vec, "fdklsafjlkadj"));
+    assert_eq!(-1,binary_search(&vec, "hello"));
+}
